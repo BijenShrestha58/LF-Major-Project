@@ -1,4 +1,4 @@
-import { Response, Request } from "express";
+import { Response, Request, NextFunction } from "express";
 import * as AuthService from "../service/auth";
 import loggerWithNameSpace from "../utils/logger";
 
@@ -10,13 +10,17 @@ const logger = loggerWithNameSpace("AuthController");
  * @param {Response} res - The response object to send back the login result.
  * @returns {Promise<void>}
  */
-export async function login(req: Request, res: Response) {
-  const { body } = req;
+export async function login(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { body } = req;
 
-  const data = await AuthService.login(body);
-  logger.info("Called login");
+    const data = await AuthService.login(body);
+    logger.info("Called login");
 
-  res.json(data);
+    res.json(data);
+  } catch (e) {
+    next(e);
+  }
 }
 
 /**

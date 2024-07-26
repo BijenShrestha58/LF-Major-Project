@@ -7,18 +7,36 @@ export class UserModel extends BaseModel {
   }
 
   static async createUser(user: IUser) {
-    console.log("before");
-    await this.queryBuilder()
-      .insert(user)
-      .table("user")
-      .then(() => console.log("after"));
+    await this.queryBuilder().insert(user).table("user");
   }
 
   static async getUserByUsername(username: string) {
     const result = await this.queryBuilder()
-      .select("*")
+      .select("id", "username", "role")
       .from("user")
-      .where("user.username", username);
-    return result[0];
+      .where("user.username", username)
+      .first();
+    return result;
+  }
+
+  static async updateUser(id: string, body: IUser) {
+    const result = await this.queryBuilder()
+      .update(body)
+      .table("user")
+      .where({ id });
+    return result;
+  }
+
+  static async deleteUser(id: string) {
+    const result = await this.queryBuilder().from("user").where({ id }).del();
+    return result;
+  }
+  static async getUserById(id: string) {
+    const result = await this.queryBuilder()
+      .select("id", "username", "role")
+      .from("user")
+      .where({ id })
+      .first();
+    return result;
   }
 }

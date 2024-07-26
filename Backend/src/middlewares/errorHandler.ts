@@ -12,7 +12,7 @@ const logger = loggerWithNameSpace("ErrorHandler");
 
 export function notFoundError(req: Request, res: Response) {
   return res.status(HttpStatusCodes.NOT_FOUND).json({
-    message: "Not Found",
+    message: "Path Not Found",
   });
 }
 
