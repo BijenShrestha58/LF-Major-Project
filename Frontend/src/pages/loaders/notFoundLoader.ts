@@ -1,7 +1,8 @@
+import { loadTemplate } from "../../utils/helpers/loadTemplate";
+
 export class NotFoundPage {
   static load: () => Promise<string> = async () => {
-    const response = await fetch("/src/pages/templates/NotFound.html");
-    return response.text();
+    return loadTemplate("/src/pages/templates/NotFound.html");
   };
 
   static initEventListeners: () => void = () => {};

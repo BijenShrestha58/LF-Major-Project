@@ -3,13 +3,13 @@
     <h2 class="text-2xl font-bold text-center">Login</h2>
     <form id="loginForm" class="space-y-6">
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700"
-          >Email</label
+        <label for="username" class="block text-sm font-medium text-gray-700"
+          >Username</label
         >
         <input
-          type="email"
-          id="email"
-          name="email"
+          type="username"
+          id="username"
+          name="username"
           required
           class="w-full px-3 py-2 mt-1 border rounded shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         />
@@ -18,13 +18,35 @@
         <label for="password" class="block text-sm font-medium text-gray-700"
           >Password</label
         >
-        <input
-          type="password"
-          id="password"
-          name="password"
-          required
-          class="w-full px-3 py-2 mt-1 border rounded shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-        />
+        <div class="relative">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full px-3 py-2 mt-1 border rounded shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          />
+          <button
+            id="showPasswordToggle"
+            type="button"
+            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm-2.83-4.24a3 3 0 00-4.24 0M12 6a9 9 0 018.485 5.5A9 9 0 0112 18a9 9 0 01-8.485-5.5A9 9 0 0112 6z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
       <button
         type="submit"
