@@ -1,17 +1,20 @@
 import { HomePage } from "./pages/loaders/homeLoader";
 import { LoginPage } from "./pages/loaders/loginLoader";
 import { NotFoundPage } from "./pages/loaders/notFoundLoader";
+import { SignUpPage } from "./pages/loaders/signupLoader";
+import { TeamBuilderPage } from "./pages/loaders/teamBuilder";
 
 let loggedIn: boolean;
 
 const routes: { [key: string]: { component: any } } = {
   "#/home": { component: HomePage },
   "#/login": { component: LoginPage },
+  "#/signup": { component: SignUpPage },
+  "#/teambuilder": { component: TeamBuilderPage },
 };
 
 export class Router {
   static async loadContent() {
-    console.log(localStorage.getItem("isLoggedIn"));
     if (localStorage.getItem("isLoggedIn") === "true") {
       loggedIn = true;
     }
@@ -20,11 +23,19 @@ export class Router {
       window.location.hash = "#/home";
     }
 
-    if (loggedIn && window.location.hash === "#/login") {
+    if (
+      loggedIn &&
+      (window.location.hash === "#/login" ||
+        window.location.hash === "#/signup")
+    ) {
       window.location.hash = "#/home";
     }
-    console.log(loggedIn);
-    if (!loggedIn) {
+
+    if (
+      !loggedIn &&
+      routes[window.location.hash] &&
+      window.location.hash !== "#/signup"
+    ) {
       window.location.hash = "#/login";
     }
 

@@ -1,0 +1,149 @@
+<div class="bg-gray-100 p-4 h-screen">
+  <div class="container mx-auto">
+    <div id="teamSection" class="bg-white p-4 rounded shadow-md mb-6">
+      <h2 class="text-2xl font-semibold mb-4">Your Teams</h2>
+      <div id="teamTabs" class="flex mb-4"></div>
+    </div>
+    <!-- Team Section -->
+    <div class="bg-white p-4 rounded shadow-md mb-6">
+      <h2 class="text-2xl font-semibold" id="teamName">Team</h2>
+      <div class="flex items-center space-x-4 mb-4">
+        <input
+          id="teamNameInput"
+          type="text"
+          placeholder="Enter team name"
+          class="flex-1 p-2 border border-gray-300 rounded"
+        />
+        <button
+          id="addTeamBtn"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Team
+        </button>
+      </div>
+    </div>
+    <div id="teamContainer" class="hidden">
+      <div class="flex space-x-4">
+        <div
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+        >
+          <img
+            id="teamPokemon1"
+            src=""
+            alt=""
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+        <div
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+        >
+          <img
+            id="teamPokemon2"
+            src=""
+            alt=""
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+        <div
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+        >
+          <img
+            id="teamPokemon3"
+            src=""
+            alt=""
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+        <div
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+        >
+          <img
+            id="teamPokemon4"
+            src=""
+            alt=""
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+        <div
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+        >
+          <img
+            id="teamPokemon5"
+            src=""
+            alt=""
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+        <div
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+        >
+          <img
+            id="teamPokemon6"
+            src=""
+            alt=""
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Search and Sort Section -->
+    <div class="bg-white p-4 rounded shadow-md mb-6">
+      <div class="flex space-x-4 items-center">
+        <input
+          id="pokemonSearch"
+          type="text"
+          placeholder="Search Pokémon..."
+          class="flex-1 p-2 border border-gray-300 rounded"
+        />
+        <select id="sortOptions" class="p-2 border border-gray-300 rounded">
+          <option value="name">Sort by Name</option>
+          <option value="type">Sort by Type</option>
+          <option value="hp">Sort by HP</option>
+          <option value="atk">Sort by Attack</option>
+          <option value="def">Sort by Defense</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Pokémon List Section -->
+    <div id="pokemonList" class="bg-white p-4 rounded shadow-md">
+      <div class="flex justify-between">
+        <h2 class="text-2xl font-semibold mb-4">Choose Pokémon</h2>
+        <div>
+          <button
+            id="prevPage"
+            class="p-2 bg-red-300 rounded mr-2 material-symbols-outlined w-12 text-white shadow-md hover:-translate-y-0.5 duration-100"
+          >
+            arrow_back_ios
+          </button>
+          <button
+            id="nextPage"
+            class="p-2 bg-green-600 rounded material-symbols-outlined w-12 text-white shadow-md hover:-translate-y-0.5 duration-100"
+          >
+            arrow_forward_ios
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-y-scroll h-96">
+        <table class="w-full table-auto">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="px-4 py-2">Name</th>
+              <th class="px-4 py-2">Type 1</th>
+              <th class="px-4 py-2">Type 2</th>
+              <th class="px-4 py-2">HP</th>
+              <th class="px-4 py-2">Atk</th>
+              <th class="px-4 py-2">Def</th>
+              <th class="px-4 py-2">SpA</th>
+              <th class="px-4 py-2">SpD</th>
+              <th class="px-4 py-2">Spe</th>
+            </tr>
+          </thead>
+          <tbody id="pokemonTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,12 +5,12 @@ import { APIGetMyDetails } from "../../api/user";
 export const isLoggedIn = async () => {
   try {
     const response = await APIGetMyDetails();
-    localStorage.setItem("user", response.data);
+    localStorage.setItem("user", JSON.stringify(response.data));
     localStorage.setItem("isLoggedIn", "true");
     return true;
   } catch (error) {
     console.error("Error fetching user details:", error);
-
+    localStorage.setItem("isLoggedIn", "false");
     // Check if the error is due to an invalid or expired access token
     if (isAxiosError(error) && error.response?.status === 401) {
       // Attempt to refresh the access token using the refresh token
@@ -27,9 +27,11 @@ export const isLoggedIn = async () => {
         // Retry the request with the new access token
         const response = await APIGetMyDetails();
         localStorage.setItem("user", response.data);
+        localStorage.setItem("isLoggedIn", "true");
         return true;
       } catch (refreshError) {
         console.error("Error refreshing token:", refreshError);
+        localStorage.setItem("isLoggedIn", "false");
 
         // Handle errors from the refresh token request (e.g., token expired, invalid)
         if (

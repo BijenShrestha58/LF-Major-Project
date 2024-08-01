@@ -9,14 +9,21 @@ const app = express();
 
 app.use(helmet());
 
+const allowedOrigins = ["http://localhost:3000"];
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) {
-        callback(null, origin);
-      } else {
-        callback(new Error("Not allowed"));
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      // Check if the origin is in the list of allowed origins
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
       }
+
+      // If the origin is not allowed, return an error
+      return callback(new Error("Not allowed by CORS"));
     },
   })
 );

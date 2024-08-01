@@ -12,7 +12,7 @@ export class UserModel extends BaseModel {
 
   static async getUserByUsername(username: string) {
     const result = await this.queryBuilder()
-      .select("id", "username", "role")
+      .select("*")
       .from("user")
       .where("user.username", username)
       .first();

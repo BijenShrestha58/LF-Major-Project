@@ -17,7 +17,7 @@ export async function createUser(user: IUser) {
   if (await getUserByUsername(user.username)) {
     throw new ConflictError("User with this username already exists");
   }
-  const SALT_ROUNDS = parseInt(config.bcrypt.saltRounds);
+  const SALT_ROUNDS = config.bcrypt.saltRounds;
   const password = await bcrypt.hash(user.password, SALT_ROUNDS);
   await UserModel.UserModel.createUser({
     ...user,
@@ -29,7 +29,14 @@ export async function createUser(user: IUser) {
 
 export async function getUserByUsername(name: string): Promise<IUser> {
   const data = await UserModel.UserModel.getUserByUsername(name);
-  return data;
+
+  if (!data) {
+    return;
+  }
+
+  const { password, ...userWithoutPassword } = data;
+
+  return userWithoutPassword;
 }
 
 export async function updateUser(id: string, body: IUser) {
@@ -40,7 +47,7 @@ export async function updateUser(id: string, body: IUser) {
   if (data && data.username !== body.username) {
     throw new ConflictError("User with this username already exists");
   }
-  const SALT_ROUNDS = parseInt(config.bcrypt.saltRounds);
+  const SALT_ROUNDS = config.bcrypt.saltRounds;
   const password = await bcrypt.hash(body.password, SALT_ROUNDS);
   const numOfRowsAffected = await UserModel.UserModel.updateUser(id, {
     ...body,

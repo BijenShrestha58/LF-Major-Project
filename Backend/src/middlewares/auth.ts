@@ -47,13 +47,12 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
  * @param {string} role - The role string to check against user's roles.
  * @returns {Function} Express middleware function to handle authorization.
  */
-export function authorize(role: string) {
+export function authorize(role: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     const user = req.user!;
-    if (!user.role.includes(role)) {
+    if (!role.includes(user.role)) {
       next(new ForbiddenError("Forbidden"));
     }
-
     next();
   };
 }

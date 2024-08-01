@@ -4,8 +4,7 @@ import bcrypt from "bcrypt";
 import config from "../config";
 import { UnauthenticatedError } from "../error/UnauthenticatedError";
 import loggerWithNameSpace from "../utils/logger";
-import { getUserByUsername } from "../service/user";
-
+import * as UserModel from "../model/user";
 const logger = loggerWithNameSpace("AuthService");
 
 /**
@@ -15,7 +14,9 @@ const logger = loggerWithNameSpace("AuthService");
  * @throws {UnauthenticatedError} If authentication fails due to invalid username or password.
  */
 export async function login(body: Pick<IUser, "username" | "password">) {
-  const existingUser = await getUserByUsername(body.username);
+  const existingUser = await UserModel.UserModel.getUserByUsername(
+    body.username
+  );
   logger.info("Called getUserByUsername");
 
   if (!existingUser) {
