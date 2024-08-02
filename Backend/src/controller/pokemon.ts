@@ -9,7 +9,12 @@ export async function getAllPokemon(
   try {
     const limit = parseInt(req.query.limit as string, 10) || 10;
     const offset = parseInt(req.query.offset as string, 10) || 0;
-    const pokemonData = await PokemonService.getAllPokemon(limit, offset);
+    const sortBy = req.query.sortBy as string;
+    const pokemonData = await PokemonService.getAllPokemon(
+      limit,
+      offset,
+      sortBy
+    );
     res.json(pokemonData);
   } catch (error) {
     next(error);

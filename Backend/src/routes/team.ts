@@ -6,7 +6,7 @@ import {
   getTeamsByUserId,
 } from "../controller/team";
 
-const router = express.Router();
+const router = express();
 
 router.post("/", createTeam);
 router.put("/add-pokemon", addPokemonToTeam);

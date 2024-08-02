@@ -25,7 +25,7 @@
     <div id="teamContainer" class="hidden">
       <div class="flex space-x-4">
         <div
-          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden cursor-pointer mb-4"
         >
           <img
             id="teamPokemon1"
@@ -35,7 +35,7 @@
           />
         </div>
         <div
-          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden cursor-pointer"
         >
           <img
             id="teamPokemon2"
@@ -45,7 +45,7 @@
           />
         </div>
         <div
-          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden cursor-pointer"
         >
           <img
             id="teamPokemon3"
@@ -55,7 +55,7 @@
           />
         </div>
         <div
-          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden cursor-pointer"
         >
           <img
             id="teamPokemon4"
@@ -65,7 +65,7 @@
           />
         </div>
         <div
-          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden cursor-pointer"
         >
           <img
             id="teamPokemon5"
@@ -75,7 +75,7 @@
           />
         </div>
         <div
-          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden"
+          class="w-1/6 bg-gray-200 h-24 flex items-center justify-center rounded overflow-hidden cursor-pointer"
         >
           <img
             id="teamPokemon6"
@@ -97,11 +97,14 @@
           class="flex-1 p-2 border border-gray-300 rounded"
         />
         <select id="sortOptions" class="p-2 border border-gray-300 rounded">
+          <option value="id">Sort by Id</option>
           <option value="name">Sort by Name</option>
-          <option value="type">Sort by Type</option>
           <option value="hp">Sort by HP</option>
           <option value="atk">Sort by Attack</option>
           <option value="def">Sort by Defense</option>
+          <option value="spAtk">Sort by Special Attack</option>
+          <option value="spDef">Sort by Special Defense</option>
+          <option value="spe">Sort by Speed</option>
         </select>
       </div>
     </div>
@@ -145,5 +148,20 @@
         </table>
       </div>
     </div>
+  </div>
+</div>
+
+<div
+  id="moveSelectModal"
+  class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50"
+>
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+    <button
+      id="closeModal"
+      class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none"
+    >
+      &times;
+    </button>
+    <div id="modalContent"></div>
   </div>
 </div>

@@ -68,3 +68,24 @@ export async function getPokemonImageByTeamPokemonId(
     next(e);
   }
 }
+
+export async function getAllAvailableMoves(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) {
+      res.status(400).json({ message: "Invalid teamPokemon ID" });
+      return;
+    }
+
+    const data = await TeamPokemonService.getAllAvailableMoves(id);
+    logger.info("Called getAllAvailableMoves");
+
+    res.json(data);
+  } catch (e) {
+    next(e);
+  }
+}

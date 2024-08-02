@@ -1,12 +1,18 @@
+import axios from "axios";
+import { POKEAPI_BASE_URL } from "../config";
 import { BadRequestError } from "../error/BadRequestError";
 import { ConflictError } from "../error/ConflictError";
 import { NotFoundError } from "../error/NotFoundError";
+import loggerWithNameSpace from "../utils/logger";
 import * as TeamPokemonModel from "../model/teamPokemon";
+
+const logger = loggerWithNameSpace("teamPokemonService");
 
 export async function createTeamPokemon(pokemonId: number) {
   const id = await TeamPokemonModel.TeamPokemonModel.createTeamPokemon(
     pokemonId
   );
+  logger.info("Called createTeamPokemon");
   return { message: "teamPokemon Created", data: id };
 }
 
@@ -45,4 +51,26 @@ export async function getPokemonImageByTeamPokemonId(id: number) {
     await TeamPokemonModel.TeamPokemonModel.getPokemonImageByTeamPokemonId(id);
 
   return res;
+}
+
+export async function getAllAvailableMoves(id: number) {
+  if (!id) {
+    throw new BadRequestError("teamPokemonId is required");
+  }
+
+  const teamPokemon = await getTeamPokemonById(id);
+  logger.info("Called getTeamPokemonById");
+
+  const res = await axios.get(
+    `${POKEAPI_BASE_URL}/pokemon/${teamPokemon.pokemonId}`
+  );
+
+  const moveIdArray = res.data.moves.map((move) => {
+    const parts = move.move.url.split("/");
+    return parts[parts.length - 2];
+  });
+
+  const filteredMoveIdArray = moveIdArray.filter((moveId) => moveId <= 165);
+
+  return filteredMoveIdArray;
 }
