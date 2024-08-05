@@ -1,3 +1,4 @@
+import { BattlePage } from "./pages/loaders/battleLoader";
 import { HomePage } from "./pages/loaders/homeLoader";
 import { LoginPage } from "./pages/loaders/loginLoader";
 import { NotFoundPage } from "./pages/loaders/notFoundLoader";
@@ -11,6 +12,7 @@ const routes: { [key: string]: { component: any } } = {
   "#/login": { component: LoginPage },
   "#/signup": { component: SignUpPage },
   "#/teambuilder": { component: TeamBuilderPage },
+  "#/battle": { component: BattlePage },
 };
 
 export class Router {

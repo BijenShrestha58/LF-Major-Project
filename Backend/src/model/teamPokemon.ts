@@ -30,7 +30,7 @@ export class TeamPokemonModel extends BaseModel {
 
   static async getPokemonImageByTeamPokemonId(id: number) {
     return await this.queryBuilder()
-      .select("pokemon.front_sprite")
+      .select("pokemon.front_sprite", "pokemon.name")
       .from("team_pokemon")
       .join("pokemon", "team_pokemon.pokemon_id", "pokemon.id")
       .where("team_pokemon.id", id)

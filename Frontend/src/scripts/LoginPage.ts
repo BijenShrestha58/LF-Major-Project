@@ -37,7 +37,6 @@ export class LoginActions {
         password: passwordInput.value,
       });
       //set access token and refresh token
-      console.log(response);
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
       await isLoggedIn();

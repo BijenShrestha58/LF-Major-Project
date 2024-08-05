@@ -6,7 +6,6 @@
     </div>
     <!-- Team Section -->
     <div class="bg-white p-4 rounded shadow-md mb-6">
-      <h2 class="text-2xl font-semibold" id="teamName">Team</h2>
       <div class="flex items-center space-x-4 mb-4">
         <input
           id="teamNameInput"
@@ -112,7 +111,10 @@
     <!-- Pokémon List Section -->
     <div id="pokemonList" class="bg-white p-4 rounded shadow-md">
       <div class="flex justify-between">
-        <h2 class="text-2xl font-semibold mb-4">Choose Pokémon</h2>
+        <h2 class="text-2xl font-semibold mb-4">
+          Choose Pokémon
+          <span id="teamName"></span>
+        </h2>
         <div>
           <button
             id="prevPage"
@@ -155,13 +157,15 @@
   id="moveSelectModal"
   class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50"
 >
-  <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+  <div
+    class="bg-white p-6 rounded-lg shadow-lg max-w-2xl h-4/6 w-full relative"
+  >
     <button
       id="closeModal"
       class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none"
     >
       &times;
     </button>
-    <div id="modalContent"></div>
+    <div id="modalContent" class="h-full overflow-scroll"></div>
   </div>
 </div>

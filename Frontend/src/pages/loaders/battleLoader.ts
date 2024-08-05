@@ -1,12 +1,12 @@
-import { HomeActions } from "../../scripts/Home";
+import { Battle } from "../../scripts/Battle";
 import { loadTemplate } from "../../utils/helpers/loadTemplate";
 
-export class HomePage {
+export class BattlePage {
   static load: () => Promise<string> = async () => {
-    return loadTemplate("/src/pages/templates/Home.html");
+    return loadTemplate("/src/pages/templates/Battle.html");
   };
 
   static initEventListeners: () => void = () => {
-    HomeActions.init();
+    Battle.init();
   };
 }

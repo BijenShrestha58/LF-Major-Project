@@ -16,4 +16,13 @@ export class PokemonModel extends BaseModel {
 
     return await query;
   }
+
+  static async getPokemonDetails(id: string) {
+    const result = await this.queryBuilder()
+      .select("*")
+      .from("pokemon")
+      .where({ id })
+      .first();
+    return result;
+  }
 }

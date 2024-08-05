@@ -1,3 +1,9 @@
+/**
+ * Toggles the visibility of a password input field and updates the button icon.
+ *
+ * @param {string} inputId - The ID of the password input element.
+ * @param {HTMLButtonElement} button - The button element that toggles password visibility.
+ */
 export function togglePassword(
   inputId: string,
   button: HTMLButtonElement

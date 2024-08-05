@@ -75,13 +75,19 @@ export async function getAllAvailableMoves(
   next: NextFunction
 ) {
   try {
+    const limit = parseInt(req.query.limit as string, 10) || 10;
+    const offset = parseInt(req.query.offset as string, 10) || 0;
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
       res.status(400).json({ message: "Invalid teamPokemon ID" });
       return;
     }
 
-    const data = await TeamPokemonService.getAllAvailableMoves(id);
+    const data = await TeamPokemonService.getAllAvailableMoves(
+      id,
+      limit,
+      offset
+    );
     logger.info("Called getAllAvailableMoves");
 
     res.json(data);

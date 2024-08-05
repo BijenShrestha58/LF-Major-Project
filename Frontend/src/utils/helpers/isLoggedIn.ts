@@ -2,6 +2,16 @@ import { isAxiosError } from "axios";
 import { APIRefresh } from "../../api/auth";
 import { APIGetMyDetails } from "../../api/user";
 
+/**
+ * Checks if the user is logged in by attempting to fetch user details.
+ *
+ * If the request fails due to an expired or invalid access token, it tries
+ * to refresh the token using a stored refresh token. If successful, it retries
+ * fetching user details.
+ *
+ * @returns {Promise<boolean|null>} A promise that resolves to `true` if the user is logged in,
+ *                                  `false` if the user is not logged in, or `null` if authentication fails.
+ */
 export const isLoggedIn = async () => {
   try {
     const response = await APIGetMyDetails();

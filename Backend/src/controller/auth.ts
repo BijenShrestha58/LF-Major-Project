@@ -29,15 +29,19 @@ export async function login(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res - The response object to send back the refreshed token or error message.
  * @returns {Promise<void>}
  */
-export async function refresh(req: Request, res: Response) {
-  const { refreshToken } = req.body;
+export async function refresh(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { refreshToken } = req.body;
 
-  if (!refreshToken) {
-    return res.status(400).json({ error: "Refresh token is required" });
+    if (!refreshToken) {
+      return res.status(400).json({ error: "Refresh token is required" });
+    }
+
+    const data = await AuthService.refresh(refreshToken);
+    logger.info("Called refresh");
+
+    res.json(data);
+  } catch (e) {
+    next(e);
   }
-
-  const data = await AuthService.refresh(refreshToken);
-  logger.info("Called refresh");
-
-  res.json(data);
 }

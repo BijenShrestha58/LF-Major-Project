@@ -5,28 +5,84 @@
   <div class="container mx-auto p-4 bg-black bg-opacity-50 min-h-screen">
     <main class="flex flex-col md:flex-row gap-4">
       <div class="md:w-1/4">
-        <div class="bg-gray-800 bg-opacity-75 p-4 rounded mb-4">
-          <h2 class="text-white text-xl mb-2">Format:</h2>
-          <select class="w-full p-2 rounded bg-gray-700 text-white">
-            <option>[Gen 9] Random Battle</option>
-            <option>[Gen 8] Random Battle</option>
-          </select>
-        </div>
         <div class="bg-gray-800 bg-opacity-75 p-4 rounded">
-          <h2 class="text-white text-xl mb-2">Team:</h2>
+          <div class="flex items-center mb-2 w-auto">
+            <h2 class="text-white text-xl">Team:</h2>
+            <select
+              id="team-select"
+              class="rounded-md ml-4 text-white bg-transparent border border-gray-50"
+            ></select>
+          </div>
+
           <div class="grid grid-cols-3 gap-2 mb-4">
-            <div class="bg-gray-700 h-16 rounded"></div>
-            <div class="bg-gray-700 h-16 rounded"></div>
-            <div class="bg-gray-700 h-16 rounded"></div>
-            <div class="bg-gray-700 h-16 rounded"></div>
-            <div class="bg-gray-700 h-16 rounded"></div>
-            <div class="bg-gray-700 h-16 rounded"></div>
+            <div class="bg-gray-700 h-16 rounded">
+              <img
+                id="teamPokemon1"
+                src=""
+                alt=""
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
+            <div class="bg-gray-700 h-16 rounded" id="pokemon2">
+              <img
+                id="teamPokemon2"
+                src=""
+                alt=""
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
+            <div class="bg-gray-700 h-16 rounded" id="pokemon3">
+              <img
+                id="teamPokemon3"
+                src=""
+                alt=""
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
+            <div class="bg-gray-700 h-16 rounded" id="pokemon4">
+              <img
+                id="teamPokemon4"
+                src=""
+                alt=""
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
+            <div class="bg-gray-700 h-16 rounded" id="pokemon5">
+              <img
+                id="teamPokemon5"
+                src=""
+                alt=""
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
+            <div class="bg-gray-700 h-16 rounded" id="pokemon6">
+              <img
+                id="teamPokemon6"
+                src=""
+                alt=""
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
           </div>
           <button
             class="bg-red-500 hover:bg-red-600 text-white w-full py-2 rounded"
+            id="battle-button"
           >
             Battle!
           </button>
+          <label for="room-input" class="text-white">Room Input</label>
+
+          <div class="flex">
+            <input
+              type="text"
+              id="room-input"
+              class="rounded border-none px-4"
+              placeholder="Enter room name..."
+            />
+            <button class="rounded bg-red-500 p-2 text-white" id="join-room">
+              Join
+            </button>
+          </div>
         </div>
       </div>
 
@@ -34,27 +90,13 @@
         <div class="bg-gray-800 bg-opacity-75 p-4 rounded mb-4">
           <h2 class="text-white text-xl mb-4">News</h2>
           <div class="bg-gray-700 p-4 rounded mb-4">
-            <h3 class="text-white text-lg font-semibold">Title 1</h3>
+            <h3 class="text-white text-lg font-semibold">How To Play</h3>
             <p class="text-gray-300 mt-2">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas eius
               consequuntur quis tempora aliquid quidem possimus ex dolor minus
               natus praesentium, deleniti eaque saepe, quaerat temporibus earum
               a numquam atque.
-              <a href="#" class="text-blue-400 hover:underline"
-                >sign up for Cycle 1</a
-              >.
             </p>
-            <p class="text-gray-400 mt-2">— eva on Jul 27, 2024</p>
-          </div>
-          <div class="bg-gray-700 p-4 rounded">
-            <h3 class="text-white text-lg font-semibold">Title 2</h3>
-            <p class="text-gray-300 mt-2">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Voluptas, eligendi, excepturi, magni velit suscipit explicabo modi
-              laboriosam praesentium nostrum harum sapiente placeat. Blanditiis
-              voluptatum asperiores consequatur ab veniam quam aliquam!
-            </p>
-            <p class="text-gray-400 mt-2">— Zarel on Jul 25, 2024</p>
           </div>
         </div>
       </div>
@@ -69,9 +111,9 @@
               >Teambuilder</a
             >
             <a
-              href="#"
-              class="bg-purple-500 hover:bg-purple-600 py-2 px-4 rounded text-center text-white"
-              >Find a user</a
+              class="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded text-center text-white"
+              id="logOutButton"
+              >Log Out</a
             >
           </nav>
         </div>

@@ -31,6 +31,7 @@ export class UserModel extends BaseModel {
     const result = await this.queryBuilder().from("user").where({ id }).del();
     return result;
   }
+
   static async getUserById(id: string) {
     const result = await this.queryBuilder()
       .select("id", "username", "role")

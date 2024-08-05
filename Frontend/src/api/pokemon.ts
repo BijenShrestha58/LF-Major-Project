@@ -14,3 +14,7 @@ export const APIGetPokemon = (
     },
   });
 };
+
+export const APIGetPokemonById = (id: number) => {
+  return GetRequest(`/pokemon/${id}`);
+};

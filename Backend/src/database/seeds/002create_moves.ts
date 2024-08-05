@@ -2,14 +2,13 @@ import axios from "axios";
 import { Knex } from "knex";
 
 const POKEAPI_BASE_URL = "https://pokeapi.co/api/v2";
-const GEN_1_MOVE_COUNT = 165; // Approximate number of Gen 1 moves
+const GEN_1_MOVE_COUNT = 165; // Number of Gen 1 moves
 
 async function fetchMoveData(id: number) {
   try {
     const response = await axios.get(`${POKEAPI_BASE_URL}/move/${id}`);
     const data = response.data;
 
-    // Extract relevant fields
     const move = {
       id: data.id,
       name: data.name,

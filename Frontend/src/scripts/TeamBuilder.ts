@@ -7,13 +7,13 @@ import {
 } from "../api/team";
 import {
   APICreateTeamPokemon,
-  APIGetAvailableMovesByTeamPokemonId,
   APIGetPokemonImageByTeamPokemonId,
 } from "../api/teamPokemon";
 import { SORT_OPTIONS } from "../utils/constants/enums";
 import { getUser } from "../utils/helpers/getUser";
 import { IPokemon } from "../utils/interfaces/pokemon.interface";
 import { ITeam } from "../utils/interfaces/team.interface";
+import MoveSelectModal from "./MoveSelectModal";
 
 export class TeamBuilder {
   static currentPage: number = 1;
@@ -22,6 +22,7 @@ export class TeamBuilder {
   static currentTeam: number = 0; // stores id of team being edited
   static currentTeamName: string = "";
   static sortBy: SORT_OPTIONS = SORT_OPTIONS.ID;
+  static moveSelectModal: MoveSelectModal;
 
   static async getPokemon(limit = 10, offset = 0, sortBy = SORT_OPTIONS.ID) {
     try {
@@ -265,62 +266,71 @@ export class TeamBuilder {
   }
 
   static async showPokemonInTab(teamData: ITeam) {
-    console.log(teamData);
     for (let i = 1; i <= 6; i++) {
       const pokemonId = teamData[`teamPokemon${i}` as keyof ITeam] as number;
-      let imageElement = document.getElementById(
+      const imageElement = document.getElementById(
         `teamPokemon${i}`
       ) as HTMLImageElement;
+
+      if (!imageElement) {
+        console.error(`Element with id teamPokemon${i} not found`);
+        continue;
+      }
+
+      const parentElement = imageElement.parentElement;
+
       if (pokemonId) {
-        const imageUrl = await TeamBuilder.getPokemonImageFromTeamPokemonId(
-          pokemonId
-        );
-        imageElement.src = imageUrl;
+        try {
+          const res = await TeamBuilder.getPokemonImageFromTeamPokemonId(
+            pokemonId
+          );
+          const imageUrl = res.frontSprite;
+          const name = res.name;
+
+          imageElement.src = imageUrl;
+          imageElement.alt = name;
+
+          if (parentElement) {
+            parentElement.style.cursor = "pointer";
+            parentElement.onclick = () => {
+              TeamBuilder.openMoveSelectModal(pokemonId, name);
+            };
+          }
+        } catch (error) {
+          console.error(`Error loading Pokémon data for slot ${i}:`, error);
+          imageElement.src = "";
+          imageElement.alt = "Error loading Pokémon";
+          if (parentElement) {
+            parentElement.style.cursor = "default";
+            parentElement.onclick = null;
+          }
+        }
       } else {
         imageElement.src = "";
         imageElement.alt = "";
-      }
-      imageElement.parentElement?.addEventListener("click", () => {
-        if (pokemonId) {
-          TeamBuilder.openMoveSelectModal(pokemonId);
+        if (parentElement) {
+          parentElement.style.cursor = "default";
+          parentElement.onclick = null;
         }
-      });
-    }
-  }
-
-  static openMoveSelectModal(pokemonId: number) {
-    const modal = document.getElementById("moveSelectModal");
-    const modalContent = document.getElementById("modalContent");
-
-    if (modal && modalContent) {
-      modal.classList.remove("hidden");
-      TeamBuilder.getAvailableMovesByTeamPokemonId(pokemonId);
-      modalContent.innerHTML = `Move selection for Pokémon ID: ${pokemonId}`;
-    }
-
-    // Close modal when clicking on <button> (x) element
-    const closeModal = document.getElementById("closeModal");
-    closeModal?.addEventListener("click", () => {
-      modal?.classList.add("hidden");
-    });
-
-    // Close modal when clicking outside of the modal content
-    window.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal?.classList.add("hidden");
       }
-    });
+    }
   }
 
-  static async getAvailableMovesByTeamPokemonId(pokemonId: number) {
-    const res = await APIGetAvailableMovesByTeamPokemonId(pokemonId);
-    console.log(res.data);
-    return res.data;
+  static async openMoveSelectModal(pokemonId: number, name: string) {
+    try {
+      this.moveSelectModal = new MoveSelectModal(pokemonId, name);
+    } catch (error) {
+      console.error("Error opening move select modal:", error);
+    }
   }
 
   static async getPokemonImageFromTeamPokemonId(teamPokemonId: number) {
-    const res = await APIGetPokemonImageByTeamPokemonId(teamPokemonId);
-    return res.data.frontSprite;
+    try {
+      const res = await APIGetPokemonImageByTeamPokemonId(teamPokemonId);
+      return res.data;
+    } catch (e) {
+      console.error("Error getting image", e);
+    }
   }
 
   static async drawSelectedPokemon() {
@@ -328,7 +338,7 @@ export class TeamBuilder {
     const teamNameContainer = document.getElementById(
       "teamName"
     ) as HTMLElement;
-    teamNameContainer.innerHTML = TeamBuilder.currentTeamName;
+    teamNameContainer.innerHTML = `for ${TeamBuilder.currentTeamName}`;
 
     if (teamContainer) {
       teamContainer.classList.remove("hidden");
